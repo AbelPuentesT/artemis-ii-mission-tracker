@@ -39,6 +39,8 @@ There is no lint script configured.
 
 **Verifying changes**: the user does not want Playwright (or other browser automation) used to check the app. Verify via `npm test`, the API responses (`curl`), and server logs instead.
 
+**Claude skills** (`.claude/skills/`): `add-event` and `capture-view` automate common edits (`src/data/events.ts`, `public/js/app.js`) — if those files move or their shapes change, update the skills too, they drift silently otherwise. `scene-conventions` documents Three.js scale/color conventions for the 3D scene specifically; its palette overlaps but isn't identical to the HUD colors in `UI Color Conventions` below, so check both before changing a color.
+
 ## 3D Coordinate System
 
 - **Units**: 1 unit = 1,000 km

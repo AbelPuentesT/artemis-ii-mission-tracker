@@ -352,6 +352,19 @@ function createOrion() {
   const light = new THREE.PointLight(0xff8844, 2, 8);
   group.add(light);
 
+  // Reentry heat-glow shell (hidden by default, shown only during REENTRADA phase)
+  const heatGlowGeo = new THREE.SphereGeometry(0.55 * SCALE, 12, 12);
+  const heatGlowMat = new THREE.MeshBasicMaterial({
+    color: 0xff4444, // scene-conventions warning color
+    transparent: true,
+    opacity: 0,
+    depthWrite: false,
+  });
+  const heatGlow = new THREE.Mesh(heatGlowGeo, heatGlowMat);
+  heatGlow.position.y = 0.6 * SCALE;
+  group.add(heatGlow);
+  group.userData.heatGlow = heatGlow;
+
   scene.add(group);
   return group;
 }
@@ -809,6 +822,12 @@ function animate(timestamp) {
     orionRef.position.copy(orionPosition);
     orionRef.rotation.y += 0.005;
     orionRef.rotation.x = 0.1;
+
+    // Heat-glow visible only during REENTRADA (per scene-conventions palette)
+    const heatGlow = orionRef.userData.heatGlow;
+    if (heatGlow) {
+      heatGlow.material.opacity = point.phase === 'REENTRADA' ? 0.5 : 0;
+    }
   }
 
   // Rotate Earth

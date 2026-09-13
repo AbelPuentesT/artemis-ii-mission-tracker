@@ -1,7 +1,7 @@
 {
-  "name": "artemis-ii-mission-tracker",
+  "name": "artemis-ii-skills-lab",
   "version": "1.0.0",
-  "description": "Interactive 3D simulator for the NASA Artemis II mission",
+  "description": "Interactive 3D simulator for the NASA Artemis II mission, used as a practice ground for Claude Code skills",
   "type": "module",
   "scripts": {
     "dev": "tsx watch src/server.ts",
